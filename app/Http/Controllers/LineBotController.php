@@ -23,7 +23,7 @@ class LineBotController extends Controller
     	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
         
 		$SKID = 1;
-		$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1,rand(1,200));
+		$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
 		
 		$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
 		
