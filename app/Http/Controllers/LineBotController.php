@@ -21,11 +21,11 @@ class LineBotController extends Controller
 		$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('channelSecret')]);
 		
 		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
-
+		}
 		
     	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+
 		
-		}
 	
 
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
