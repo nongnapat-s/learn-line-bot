@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/reply-bot', 'LineBotController@reply');
+
+Route::get('/test', function () {
+    return \App\LineTest::webHookData();
+});
