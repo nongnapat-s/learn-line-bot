@@ -20,9 +20,8 @@ class LineBotController extends Controller
 		
 		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
 
-		for ($i = 1; $i <= 2; $i++) {	
     	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
-         }
+        $response = $bot->replyMessage($replyToken, $textMessageBuilder);
 	
 
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
