@@ -22,7 +22,7 @@ class LineBotController extends Controller
 		
     	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
         
-		$textMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder(' ID ของคุณคือ '. $userId);
 		
 		$response2 = $bot->pushMessage($userId, $textMessageBuilder2);
 		
