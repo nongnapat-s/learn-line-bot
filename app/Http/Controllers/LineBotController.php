@@ -14,20 +14,18 @@ class LineBotController extends Controller
 
     	$userId = $request->input('events')[0]['source']['userId'];
 		
-		for ($i = 1; $i <= 2; $i++) {	
-
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('accessToken'));
 
 		$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('channelSecret')]);
 		
 		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
-		}
 		
     	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
-
+        
+		$textMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
 		
-	
-
+		$response2 = $bot->pushMessage($userId, $textMessageBuilder2);
+		
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
     	/*$webHookData = '{
