@@ -18,9 +18,9 @@ class LineBotController extends Controller
 
 		$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('channelSecret')]);
 		
-		for ($i = 1; $i <= 2; $i++) {
 		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
-			
+
+		for ($i = 1; $i <= 2; $i++) {	
     	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
          }
 	
