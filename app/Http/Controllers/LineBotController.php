@@ -17,15 +17,21 @@ class LineBotController extends Controller
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('accessToken'));
 
 		$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('channelSecret')]);
-		$actions = array (
-  		New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("yes", "ans=y"),
-  		New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("no", "ans=N")
-		);
-		$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("confim message", $actions);
-		$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("confim message", $button);
-		$response = $bot->replyMessage($event->getReplyToken(), $outputText);
 
-	/*	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
+		$columns = array();
+		$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
+		for($i=0;$i<5;$i++) {
+ 			 $actions = array(
+   			 	new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Add to Cart","action=carousel&button=".$i),
+    			new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("View","http://www.google.com")
+  			);
+  		$column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("Title", "description", $img_url , $actions);
+  		$columns[] = $column;
+		}
+		$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
+		$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("Carousel Demo", $carousel);
+
+		/*$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
 		
 		$response = $bot->replyMessage($replyToken, $textMessageBuilder);*/
 
