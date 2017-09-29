@@ -12,6 +12,8 @@ class LineBotController extends Controller
 
     	$userText = $request->input('events')[0]['message']['text'];
 
+    	$userId = $request->input('events')[0]['source']['userId'];
+
     	$accessToken = 'FhO+ayYVWCyleSJC6eI0uDCICRv7MCYre72ocOTeyVtUbYp740dAJMtvOce9tS+aNoUm+GIemTsv63kHA3w5dtBdtlLWc+xGB39Ghc0zzf06jeWN67D0xckWEnMkC1VRkxaeG3Z61QsNV9eOYmXyLAdB04t89/1O/w1cDnyilFU=';
 
     	$channelSecret = '5f6c08aaad8f7da89adb056ddb7dd514';
@@ -20,7 +22,7 @@ class LineBotController extends Controller
 
 		$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $channelSecret]);
 
-		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText);
+		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . 'ID ของคุณคือ '. $userId);
 
 		$response = $bot->replyMessage($replyToken, $textMessageBuilder);
 
