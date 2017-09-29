@@ -18,15 +18,27 @@ class LineBotController extends Controller
 
 		$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('channelSecret')]);
 
-		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText);
+		//$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText);
 
-		$textMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder(' ID ของคุณคือ '. $userId);
+		//$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
 
-		$response = $bot->replyMessage($replyToken, $textMessageBuilder);
-		$response2 = $bot->replyMessage($replyToken, $textMessageBuilder2);
+		//$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+
+		//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+
+		$x = 1; 
+		while($x <= 2) {
+    		if ($x =1){
+				$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText);
+			}
+			else {
+				$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
+			}
+        $response = $bot->replyMessage($replyToken, $textMessageBuilder);
 
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
-		echo $response2->getHTTPStatus() . ' ' . $response2->getRawBody();
+    		$x++;
+		} 
     	/*$webHookData = '{
 						  	"events": [
 						      {
