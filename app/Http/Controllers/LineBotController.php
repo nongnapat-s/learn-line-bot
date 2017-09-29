@@ -18,19 +18,27 @@ class LineBotController extends Controller
 
 		$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('channelSecret')]);
 
-		//$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
+		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
 		
-		//$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+		$response = $bot->replyMessage($replyToken, $textMessageBuilder);
 
-		//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
-		for ($x = 0; $x <= 2; $x++) 
-		{
-		 	$textMessageBuilder[$x] = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText);
-	
-		 	$response[$x] = $bot->replyMessage($replyToken, $textMessageBuilder[$x]);
+		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+		
+		$replyToken2 = $request->input('events')[0]['replyToken'];
 
-			echo $response[$x]->getHTTPStatus() . ' ' . $response[$x]->getRawBody();
-     	}			
+    	$userText2 = $request->input('events')[0]['message']['text'];
+
+    	$userId2 = $request->input('events')[0]['source']['userId'];
+
+        $httpClient2 = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('accessToken'));
+
+		$bot2 = new \LINE\LINEBot($httpClient2, ['channelSecret' => env('channelSecret')]);
+
+		$textMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText2 . ' ID ของคุณคือ '. $userId2);
+		
+		$response2 = $bot2->replyMessage($replyToken2, $textMessageBuilder2);
+
+		echo $response2->getHTTPStatus() . ' ' . $response2->getRawBody();
     	/*$webHookData = '{
 						  	"events": [
 						      {
