@@ -20,12 +20,12 @@ class LineBotController extends Controller
 
 		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
 		
-		$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+		for ($i = 1; $i <= 2; $i++) {
+    	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+         }
+	
 
-        for ($i = 1; $i <= 2; $i++) {
-    	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
-		}
-		
+		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
     	/*$webHookData = '{
 						  	"events": [
