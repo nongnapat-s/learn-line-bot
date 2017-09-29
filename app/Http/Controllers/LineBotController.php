@@ -25,11 +25,11 @@ class LineBotController extends Controller
 		//echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 		for ($x = 0; $x <= 2; $x++) 
 		{
-		 	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText);
+		 	$textMessageBuilder[$x] = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText);
 	
-		 	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+		 	$response[$x] = $bot->replyMessage($replyToken, $textMessageBuilder[$x]);
 
-			echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+			echo $response[$x]->getHTTPStatus() . ' ' . $response[$x]->getRawBody();
      	}			
     	/*$webHookData = '{
 						  	"events": [
