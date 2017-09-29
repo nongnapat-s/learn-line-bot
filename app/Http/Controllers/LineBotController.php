@@ -18,13 +18,12 @@ class LineBotController extends Controller
 
 		$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('channelSecret')]);
 
-		//$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
-		$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
-		$outputText = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
-		$response = $bot->replyMessage($event->getReplyToken(), $outputText);
-		//$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText . ' ID ของคุณคือ '. $userId);
+		
+		$response = $bot->replyMessage($replyToken, $textMessageBuilder);
 
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+
     	/*$webHookData = '{
 						  	"events": [
 						      {
