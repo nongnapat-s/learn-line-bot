@@ -18,14 +18,14 @@ class LineBotController extends Controller
 
 		$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('channelSecret')]);
 		
-		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText);
+		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText. ' ID ของคุณคือ '. $userId);
 		
     	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
         
 		$SKID = 1;
-		$textMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(rand(1,4),rand(1,430));
+		$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(rand(1,4),rand(1,430));
 		
-		$response2 = $bot->pushMessage($userId, $textMessageBuilder2);
+		$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
 		
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
