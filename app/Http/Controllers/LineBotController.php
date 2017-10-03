@@ -23,9 +23,11 @@ class LineBotController extends Controller
     	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
         
 		$SKID = 1;
-		$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
-		
-		$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
+
+		//$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
+		$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
+		$outputText = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
+		$response2 = $bot->pushMessage($userId, $outputText) ;
 		
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
