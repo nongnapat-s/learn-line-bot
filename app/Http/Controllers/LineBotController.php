@@ -37,8 +37,8 @@ class LineBotController extends Controller
 		}else{
   			$arrPostData = array();
   			$arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  			$arrPostData['messages'][0]['type'] = "text";
-  			$arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
+  			$arrPostData['messages'][0]['type'] = "image";
+  			$arrPostData['messages'][0]['image'] = "http://th.seaicons.com/wp-content/uploads/2016/03/filetype-jpg-icon.png";
 		}
  
  
