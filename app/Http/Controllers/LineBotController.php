@@ -11,7 +11,7 @@ class LineBotController extends Controller
     	
        // $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('accessToken'));
 
-		$strAccessToken = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('accessToken'));
+		$strAccessToken = "FhO+ayYVWCyleSJC6eI0uDCICRv7MCYre72ocOTeyVtUbYp740dAJMtvOce9tS+aNoUm+GIemTsv63kHA3w5dtBdtlLWc+xGB39Ghc0zzf06jeWN67D0xckWEnMkC1VRkxaeG3Z61QsNV9eOYmXyLAdB04t89/1O/w1cDnyilFU=";
 		$content = file_get_contents('php://input');
 		$arrJson = json_decode($content, true);
  		$strUrl = "https://api.line.me/v2/bot/message/reply";
@@ -28,7 +28,7 @@ class LineBotController extends Controller
   			$arrPostData = array();
   			$arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   			$arrPostData['messages'][0]['type'] = "text";
-  			$arrPostData['messages'][0]['text'] = "MedSiCon ค่ะ";
+  			$arrPostData['messages'][0]['text'] = "ฉันยังไม่มีชื่อนะ";
 		}else if($arrJson['events'][0]['message']['text'] == "ทำอะไรได้บ้าง"){
   			$arrPostData = array();
   			$arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
@@ -37,22 +37,21 @@ class LineBotController extends Controller
 		}else{
   			$arrPostData = array();
   			$arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  			$arrPostData['messages'][0]['type'] = "image";
-  			$arrPostData['messages'][0]['image'] = 'http://th.seaicons.com/wp-content/uploads/2016/03/filetype-jpg-icon.png';
+  			$arrPostData['messages'][0]['type'] = "text";
+  			$arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
 		}
  
  
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL,$strUrl);
 		curl_setopt($ch, CURLOPT_HEADER, false);
-		curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrPostData));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		$result = curl_exec($ch);
 		curl_close ($ch);
-	    }
+    }
 }
 
-//https://www.unzeen.com/article/3506/
