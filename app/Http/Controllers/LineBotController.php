@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+require_once '../vendor/autoload.php';
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
 use Illuminate\Http\Request;
 
 class LineBotController extends Controller
