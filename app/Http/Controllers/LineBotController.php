@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-require_once '../vendor/autoload.php';
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-use Monolog\Handler\FirePHPHandler;
+
 use Illuminate\Http\Request;
 
 class LineBotController extends Controller
@@ -24,12 +21,10 @@ class LineBotController extends Controller
 		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText. ' ID ของคุณคือ '. $userId);
 		
     	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
-        
-		$SKID = 1;
-
-		//$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
-		$outputText = new \LINE\LINEBot\MessageBuilder\LocationMessageBuilder("Eiffel Tower", "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France", 48.858328, 2.294750);
-		$response2 = $bot->pushMessage($event->getReplyToken(), $outputText);
+		
+		$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
+		
+		$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
 		
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
