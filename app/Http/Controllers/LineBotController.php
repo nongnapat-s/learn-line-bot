@@ -25,9 +25,8 @@ class LineBotController extends Controller
 		$SKID = 1;
 
 		//$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
-		$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
-		$outputText = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
-		$response2 = $bot->pushMessage($userId, $outputText) ;
+		$outputText = new \LINE\LINEBot\MessageBuilder\LocationMessageBuilder("Eiffel Tower", "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France", 48.858328, 2.294750);
+		$response2 = $bot->pushMessage($event->getReplyToken(), $outputText);
 		
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
