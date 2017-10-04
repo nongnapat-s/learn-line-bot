@@ -3,55 +3,60 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
 
 class LineBotController extends Controller
 {
     public function reply(Request $request)
     {
-    	
-       // $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('accessToken'));
+    	$replyToken = $request->input('events')[0]['replyToken'];
 
-		$strAccessToken = "FhO+ayYVWCyleSJC6eI0uDCICRv7MCYre72ocOTeyVtUbYp740dAJMtvOce9tS+aNoUm+GIemTsv63kHA3w5dtBdtlLWc+xGB39Ghc0zzf06jeWN67D0xckWEnMkC1VRkxaeG3Z61QsNV9eOYmXyLAdB04t89/1O/w1cDnyilFU=";
-		$content = file_get_contents('php://input');
-		$arrJson = json_decode($content, true);
- 		$strUrl = "https://api.line.me/v2/bot/message/reply";
- 		$arrHeader = array();
-		$arrHeader[] = "Content-Type: application/json";
-		$arrHeader[] = "Authorization: Bearer {$strAccessToken}";
- 
-		if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
-  			$arrPostData = array();
-  			$arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  			$arrPostData['messages'][0]['type'] = "text";
-  			$arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
-		}else if($arrJson['events'][0]['message']['text'] == "ชื่ออะไร"){
-  			$arrPostData = array();
-  			$arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  			$arrPostData['messages'][0]['type'] = "text";
-  			$arrPostData['messages'][0]['text'] = "ฉันยังไม่มีชื่อนะ";
-		}else if($arrJson['events'][0]['message']['text'] == "ทำอะไรได้บ้าง"){
-  			$arrPostData = array();
-  			$arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  			$arrPostData['messages'][0]['type'] = "text";
-  			$arrPostData['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
-		}else{
-  			$arrPostData = array();
-  			$arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  			$arrPostData['messages'][0]['type'] = "image";
-  			$arrPostData['messages'][0]['image'] = "http://th.seaicons.com/wp-content/uploads/2016/03/filetype-jpg-icon.png";
-		}
- 
- 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL,$strUrl);
-		curl_setopt($ch, CURLOPT_HEADER, false);
-			curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrPostData));
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		$result = curl_exec($ch);
-		curl_close ($ch);
+    	$userText = $request->input('events')[0]['message']['text'];
+
+    	$userId = $request->input('events')[0]['source']['userId'];
+		
+        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('accessToken'));
+
+		$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('channelSecret')]);
+		
+		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText. ' ID ของคุณคือ '. $userId);
+		
+    	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+		
+		$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
+		
+		$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
+		
+		$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
+		
+		$outputText = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
+		
+		$response3 = $bot->pushMessage($userId, $outputText);
+		
+		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+
+    	/*$webHookData = '{
+						  	"events": [
+						      {
+						        "replyToken": "nHuyWiB7yP5Zw52FIkcQobQuGDXCTA",
+						        "type": "message",
+						        "timestamp": 1462629479859,
+						        "source": {
+						             "type": "user",
+						             "userId": "U206d25c2ea6bd87c17655609a1c37cb8"
+						         },
+						         "message": {
+						             "id": "325708",
+						             "type": "text",
+						             "text": "Hello, world"
+						          }
+						      }
+						  ]
+						}';
+		return json_decode($webHookData);
+     	//return $request->all(); //all เป็น method ที่เก็บข้อมูลที่จาก Request ex. input('firstname')*/
     }
 }
 
