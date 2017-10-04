@@ -29,11 +29,11 @@ class LineBotController extends Controller
 		
 		$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
 		
-		$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
+		$img_url = "https://pbs.twimg.com/profile_images/763719762841104385/M02-z33v.jpg";
 		
-		$outputText = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
+		$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
 		
-		$response3 = $bot->pushMessage($userId, $outputText);
+		$response3 = $bot->pushMessage($userId, $imageMessageBuilder);
 		
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
