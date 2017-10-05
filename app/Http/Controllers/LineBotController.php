@@ -24,11 +24,6 @@ class LineBotController extends Controller
 		switch($userText) {
 			
     	case "สวัสดี":
-		
-        		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('สวัสดี ID ของคุณคือ '. $userId);
-		
-    			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
-			
 				$actions = array (
 					// general message action
 					New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("button 1", "text 1"),
