@@ -29,7 +29,7 @@ class LineBotController extends Controller
 		
 		$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
 		
-		$img_url = "https://pbs.twimg.com/profile_images/763719762841104385/M02-z33v.jpg";
+		$img_url = "http://s1.dmcdn.net/VE6Pe/240x240-j9O.jpg";
 		
 		$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
 		
