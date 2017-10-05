@@ -37,7 +37,7 @@ class LineBotController extends Controller
         break;		
         case "p":
 
-				$img_url = "https://app-name.herokuapp.com/image/my_pig.jpg";
+				$img_url = "../public/1.jpg";
 				
 				$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
 		
