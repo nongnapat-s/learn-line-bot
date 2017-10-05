@@ -28,6 +28,24 @@ class LineBotController extends Controller
         		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('สวัสดี ID ของคุณคือ '. $userId);
 		
     			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+			
+				$actions = array (
+					// general message action
+					New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("button 1", "text 1"),
+					// URL type action
+					New \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("ดูใบ Consult", "http://www.google.com"),
+					// The following two are interactive actions
+					New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("ปฏิเสธ", "page=3"),
+					New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("ส่งต่อ", "page=1")
+				);
+				
+				$img_url = "https://benbrausen.com/wp-content/uploads/2017/05/HTTPSGuideToGoingSecure-240x240.jpg";
+			
+				$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("สวัสดี", "มีใบ Consult มาส่งค่ะ", $img_url, $actions);
+			
+				$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
+			
+				$response2 = $bot->pushMessage($replyToken, $outputText);
         break;
     	case "ชื่ออะไร":
 
@@ -35,29 +53,15 @@ class LineBotController extends Controller
 		
     			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
         break;		
-    	/*case "ขอดูรูปหน่อย":
+    	case "pic":
 
 +				$img_url = "https://benbrausen.com/wp-content/uploads/2017/05/HTTPSGuideToGoingSecure-240x240.jpg";
 +				
-				$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url);
+				$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
 		
     			$response = $bot->replyMessage($replyToken, $imageMessageBuilder);
-        break;		*/
-		case "b" :
-			$actions = array (
-				// general message action
-				New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("button 1", "text 1"),
-				// URL type action
-				New \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("Google", "http://www.google.com"),
-				// The following two are interactive actions
-				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("next page", "page=3"),
-				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Previous", "page=1")
-			);
-			$img_url = "https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363";
-			$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("button text", "description", $img_url, $actions);
-			$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
-			$response = $bot->replyMessage($replyToken, $outputText);
-			break;
+        break;		
+
    	 	default: 
 
        			$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
