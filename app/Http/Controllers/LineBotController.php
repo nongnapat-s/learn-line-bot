@@ -35,29 +35,41 @@ class LineBotController extends Controller
 		
     			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
         break;		
-    	case "pic":
+        /*case "picture":
 
 				$img_url = "https://benbrausen.com/wp-content/uploads/2017/05/HTTPSGuideToGoingSecure-240x240.jpg";
 				
 				$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
 		
     			$response = $bot->replyMessage($replyToken, $imageMessageBuilder);
-        break;		
-		case "button" :
+
+        break;	*/	
+
+		case "ทำอะไรได้บ้าง":
+
 			$actions = array (
-   			// general message action
-   			New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("button 1", "text 1"),
-   			// URL type action
-   			New \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("Google", "http://www.google.com"),
-   			// The following two are interactive actions
-   			New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("next page", "page=3"),
-   			New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Previous", "page=1")
+
+   				// general message action
+   				New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("button 1", "text 1"),
+   			
+			   // URL type action
+   				New \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("Google", "http://www.google.com"),
+   			
+			   // The following two are interactive actions
+   				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("next page", "page=3"),
+   			
+			   	New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Previous", "page=1")
  			);
 			$img_url = "https://benbrausen.com/wp-content/uploads/2017/05/HTTPSGuideToGoingSecure-240x240.jpg";
- 			$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("button text", "description", $img_url, $actions);
- 			$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
+ 			
+			$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("สวัสดี", "มีใบ Consult มาส่งค่ะ", $img_url, $actions);
+ 			
+			$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
+			
 			$response = $bot->replyMessage($replyToken, $outputText);
+			
 			break;
+
    	 	default: 
 
        			$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
