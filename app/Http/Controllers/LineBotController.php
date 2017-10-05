@@ -35,14 +35,22 @@ class LineBotController extends Controller
 		
     			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
         break;		
-    	case "ขอดูรูปหน่อย":
+    	/*case "ขอดูรูปหน่อย":
 
 +				$img_url = "https://benbrausen.com/wp-content/uploads/2017/05/HTTPSGuideToGoingSecure-240x240.jpg";
 +				
 				$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url);
 		
     			$response = $bot->replyMessage($replyToken, $imageMessageBuilder);
-        break;		
+        break;		*/
+		case "c" :
+			$actions = array (
+				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("yes", "ans=y"),
+				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("no", "ans=N"));
+			$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("problem", $actions);
+			$outputText = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
+			$response = $bot->replyMessage($replyToken, $outputText);
+			break;
     	    	
    	 	default: 
 
