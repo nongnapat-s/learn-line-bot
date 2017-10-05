@@ -20,18 +20,20 @@ class LineBotController extends Controller
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('accessToken'));
 
 		$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('channelSecret')]);
+
+		if ($userText == "Hello")
+		{
+	
+				$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText. ' ID ของคุณคือ '. $userId);
 		
-		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userText. ' ID ของคุณคือ '. $userId);
+    			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+
+		}else {
 		
-    	$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+				$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
 		
-		$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
-		
-		$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
-		
-		$stickerMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
-		
-		$response3 = $bot->pushMessage($userId, $stickerMessageBuilder2);
+				$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
+		}
 		
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
