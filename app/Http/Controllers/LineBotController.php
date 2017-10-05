@@ -29,11 +29,9 @@ class LineBotController extends Controller
 		
 		$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
 		
-		$img_url = "https://benbrausen.com/wp-content/uploads/2017/05/HTTPSGuideToGoingSecure-240x240.jpg";
+		$stickerMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
 		
-		$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
-		
-		$response3 = $bot->pushMessage($userId, $imageMessageBuilder);
+		$response3 = $bot->pushMessage($userId, $stickerMessageBuilder2);
 		
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
