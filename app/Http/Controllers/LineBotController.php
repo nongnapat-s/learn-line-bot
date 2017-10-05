@@ -37,7 +37,7 @@ class LineBotController extends Controller
         break;		
         case "picture":
 
-				$img_url = 'public\1.jpg';
+				$img_url = '/public/1.jpg';
 				
 				$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
 		
