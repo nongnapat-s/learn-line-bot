@@ -50,17 +50,17 @@ class LineBotController extends Controller
 			$actions = array (
 
    				// general message action
-   				New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("button 1", "text 1"),
+   				New \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("ตกลง", "ตกลง"),
    			
 			   // URL type action
-   				New \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("Google", "http://www.google.com"),
+   				New \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("ดูใบ Consult", "http://www.google.com"),
    			
 			   // The following two are interactive actions
-   				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("next page", "page=3"),
+   				New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("ปฏิเสธ", "page=3"),
    			
-			   	New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("Previous", "page=1")
+			   	New \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("ส่งต่อ", "page=1")
  			);
-			$img_url = "https://benbrausen.com/wp-content/uploads/2017/05/HTTPSGuideToGoingSecure-240x240.jpg";
+			$img_url = "https://pbs.twimg.com/media/ChMK_8gUcAA7XEq.jpg";
  			
 			$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("สวัสดี", "มีใบ Consult มาส่งค่ะ", $img_url, $actions);
  			
