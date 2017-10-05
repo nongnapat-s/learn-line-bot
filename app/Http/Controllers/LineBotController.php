@@ -35,15 +35,15 @@ class LineBotController extends Controller
 		
     			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
         break;		
-        /*case "picture":
+        case "picture":
 
-				$img_url = "https://benbrausen.com/wp-content/uploads/2017/05/HTTPSGuideToGoingSecure-240x240.jpg";
+				$img_url = 'public\1.jpg';
 				
 				$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
 		
     			$response = $bot->replyMessage($replyToken, $imageMessageBuilder);
 
-        break;	*/	
+        break;		
 
 		case "ทำอะไรได้บ้าง":
 
