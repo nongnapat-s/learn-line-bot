@@ -24,16 +24,31 @@ class LineBotController extends Controller
 		switch($userText) {
 			
     	case "สวัสดี":
+		
         		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('สวัสดี ID ของคุณคือ '. $userId);
 		
     			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
         break;
-    	
+    	case "ชื่ออะไร":
+
+        		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('MedSiCon ค่ะ');
+		
+    			$response = $bot->replyMessage($replyToken, $textMessageBuilder);
+        break;		
+    	case "ขอดูรูปหน่อย":
+
++				$img_url = "https://benbrausen.com/wp-content/uploads/2017/05/HTTPSGuideToGoingSecure-240x240.jpg";
++				
+				$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
+		
+    			$response = $bot->replyMessage($replyToken, $imageMessageBuilder);
+        break;		
+    	    	
    	 	default: 
 
        			$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2,rand(140,158));
 		
-				$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
+				$response = $bot->replyMessage($replyToken, $stickerMessageBuilder);
 		}
 	
 				
