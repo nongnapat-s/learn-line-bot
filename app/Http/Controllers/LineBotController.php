@@ -29,7 +29,7 @@ class LineBotController extends Controller
 		
 		$response2 = $bot->pushMessage($userId, $stickerMessageBuilder);
 		
-		$img_url = "http://s1.dmcdn.net/VE6Pe/240x240-j9O.jpg";
+		$img_url = "https://benbrausen.com/wp-content/uploads/2017/05/HTTPSGuideToGoingSecure-240x240.jpg";
 		
 		$imageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($img_url, $img_url);
 		
